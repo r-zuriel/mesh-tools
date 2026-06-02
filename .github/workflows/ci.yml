@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint shell scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: Run shellcheck
+        run: |
+          shopt -s globstar nullglob
+          files=(src/**/*.sh bin/*.sh)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No shell scripts yet — skipping."
+          else
+            shellcheck "${files[@]}"
+          fi
+
+  test:
+    name: Smoke tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: CLI smoke test
+        run: |
+          node bin/mesh-tools.js --version
+          node bin/mesh-tools.js --help
+      - name: Test suite
+        run: npm test

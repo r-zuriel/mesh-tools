@@ -1,0 +1,37 @@
+{
+  "name": "@r-zuriel/mesh-tools",
+  "version": "0.0.0",
+  "description": "Visibility & methodology tools for AI-augmented infrastructure work",
+  "type": "module",
+  "bin": {
+    "mesh-tools": "./bin/mesh-tools.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "docs/",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "bash test/run.sh",
+    "lint": "shellcheck src/**/*.sh bin/*.sh 2>/dev/null || true"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "claude-code",
+    "hooks",
+    "observability",
+    "infrastructure",
+    "methodology",
+    "mesh",
+    "sre"
+  ],
+  "author": "Ricardo Zuriel Nuño Vazquez <r.zuriel.nuno@protonmail.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

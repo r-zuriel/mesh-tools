@@ -1,0 +1,28 @@
+# Node
+node_modules/
+npm-debug.log*
+.npm/
+
+# Build / dist
+dist/
+*.tgz
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Local / private — never publish
+.env
+.env.*
+*.local
+secrets/
+**/auto-distilled-*.md
+
+# Test artifacts
+test/tmp/
+/tmp/
