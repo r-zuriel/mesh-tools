@@ -36,4 +36,13 @@ if [ "$fail" -ne 0 ]; then
   echo "Some tests failed." >&2
   exit 1
 fi
-echo "All smoke tests passed."
+echo "All CLI smoke tests passed."
+
+# Hook smoke tests (require jq; skip cleanly if absent)
+if command -v jq >/dev/null 2>&1; then
+  echo
+  echo "Running hook smoke tests..."
+  bash "$ROOT/test/hooks.test.sh" || exit 1
+else
+  echo "jq not found — skipping hook smoke tests."
+fi
