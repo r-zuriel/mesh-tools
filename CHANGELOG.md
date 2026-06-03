@@ -6,6 +6,23 @@ All notable changes to this project are documented here. Format based on
 
 ## [Unreleased]
 
+## [0.2.0] — Mesh file-bus
+
+### Added
+- `src/mesh/mesh-send.sh` — send a Markdown message to another identity's inbox,
+  with priority and `--reply-to` threading; atomic write via intra-directory temp.
+- `src/mesh/mesh-check.sh` — list / show / mark-read inbox messages.
+- `src/mesh/mesh-init.sh` — initialize the bus, register identities, manage the
+  default local identity.
+- Four generic identity templates under `src/mesh/identities/` (dev, reviewer,
+  documenter, methodologist).
+- Mesh round-trip smoke tests (`test/mesh.test.sh`), wired into `npm test`.
+- Configurable via `MESH_BUS_DIR`, `MESH_IDENTITY_FILE`, `MESH_IDENTITY`.
+
+### Notes
+- Portable: no `xxd` dependency (uses `od` with a `$RANDOM` fallback) and no
+  `date -Iseconds`.
+
 ## [0.1.0] — Session visibility
 
 ### Added
@@ -29,5 +46,6 @@ All notable changes to this project are documented here. Format based on
   CLI entrypoint skeleton, CI workflow, base documentation.
 - CI secret scanning via gitleaks on every push and pull request.
 
-[Unreleased]: https://github.com/r-zuriel/mesh-tools/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/r-zuriel/mesh-tools/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/r-zuriel/mesh-tools/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/r-zuriel/mesh-tools/releases/tag/v0.1.0

@@ -46,3 +46,8 @@ if command -v jq >/dev/null 2>&1; then
 else
   echo "jq not found — skipping hook smoke tests."
 fi
+
+# Mesh smoke tests
+echo
+echo "Running mesh smoke tests..."
+bash "$ROOT/test/mesh.test.sh" || exit 1
