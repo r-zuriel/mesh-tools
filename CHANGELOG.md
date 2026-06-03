@@ -18,6 +18,7 @@ All notable changes to this project are documented here. Format based on
   documenter, methodologist).
 - Mesh round-trip smoke tests (`test/mesh.test.sh`), wired into `npm test`.
 - Configurable via `MESH_BUS_DIR`, `MESH_IDENTITY_FILE`, `MESH_IDENTITY`.
+- `SECURITY.md` — trust model and `MESH_BUS_DIR` guidance.
 
 ### Notes
 - Portable: no `xxd` dependency (uses `od` with a `$RANDOM` fallback) and no
