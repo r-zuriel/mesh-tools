@@ -6,6 +6,20 @@ All notable changes to this project are documented here. Format based on
 
 ## [Unreleased]
 
+## [0.3.0] — Methodology templates
+
+### Added
+- Seven methodology docs under `src/methods/` (Cordada, staged mass rollout,
+  pre-flight/flags/gotchas, peer-review severity classifier, the 4 checks, mesh
+  peer-review, document-on-close), each with when-to-use / steps / when-NOT /
+  example.
+- Four copy-paste templates under `src/methods/templates/` (mass-change work-log,
+  technical ADR, business ADR, build & frontend gotchas).
+- Index in `src/methods/README.md`.
+
+### Notes
+- All methods are harvested from real operations and anonymized for public use.
+
 ## [0.2.0] — Mesh file-bus
 
 ### Added
