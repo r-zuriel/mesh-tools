@@ -76,11 +76,13 @@ printf -- '| %s | %s | %s | %s | %s | %s |\n' \
 # Aggregate metrics (cumulative across all days)
 metricsfile="$LOGDIR/_metrics.json"
 if [ ! -f "$metricsfile" ]; then
+  # shellcheck disable=SC2016  # $fs is a jq variable, not a shell variable
   jq -cn --arg fs "$(now_iso)" '{total:0,success:0,failure:0,by_subagent_type:{},by_tool:{},first_seen:$fs}' \
     > "$metricsfile" 2>/dev/null
 fi
 
 # Update metrics atomically (write tmp, then move)
+# shellcheck disable=SC2016  # $sub/$t/$st/$ls are jq variables, not shell variables
 jq --arg sub "$subagent_type" --arg t "$tool" --arg st "$status" --arg ls "$(now_iso)" '
   .total = (.total + 1)
   | (if $st == "success" then .success = (.success + 1) else .failure = (.failure + 1) end)
@@ -97,6 +99,7 @@ if [ "${total:-0}" -gt "$ALERT_MIN" ] 2>/dev/null && [ "${failures:-0}" -gt 0 ] 
   if [ $((failures * 100)) -gt $((ALERT_PCT * total)) ] 2>/dev/null; then
     rate=$(( failures * 100 / total ))
     ctx="SUBAGENT MONITOR ALERT: failure rate = ${rate}% (${failures}/${total}). Review ${logfile} and ${metricsfile}. Possible Task/Agent tool degradation."
+    # shellcheck disable=SC2016  # $c is a jq variable, not a shell variable
     jq -cn --arg c "$ctx" '{hookSpecificOutput:{hookEventName:"PostToolUse",additionalContext:$c}}' 2>/dev/null
   fi
 fi

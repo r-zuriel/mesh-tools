@@ -59,7 +59,8 @@ if [ ! -f "$logfile" ]; then
   } >> "$logfile" 2>/dev/null
 fi
 
-# Append the action
+# Append the action (backticks are literal Markdown, not command substitution)
+# shellcheck disable=SC2016
 printf -- '- `%s` **%s** %s\n' "$ts" "$tool" "$detail" >> "$logfile" 2>/dev/null
 
 # Per-session counter
@@ -72,6 +73,7 @@ printf '%s' "$count" > "$countfile" 2>/dev/null
 if [ "$EVERY" -gt 0 ] && [ $((count % EVERY)) -eq 0 ]; then
   ctx="CHECKPOINT (${count} actions executed). Pause and summarize in 3 lines: (1) what is done so far, (2) what you are doing now, (3) what remains. Full command log: ${logfile}. This counters loss of visibility in long sessions — do not skip it even mid-flow."
   # Emit JSON with additionalContext (injected into the model)
+  # shellcheck disable=SC2016  # $c is a jq variable, not a shell variable
   jq -cn --arg c "$ctx" '{hookSpecificOutput:{hookEventName:"PostToolUse",additionalContext:$c}}' 2>/dev/null
 fi
 
