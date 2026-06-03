@@ -9,5 +9,6 @@ All notable changes to this project are documented here. Format based on
 ### Added
 - Project scaffold (F1): repository structure, MIT license, `package.json`,
   CLI entrypoint skeleton, CI workflow, base documentation.
+- CI secret scanning via gitleaks on every push and pull request.
 
 [Unreleased]: https://github.com/r-zuriel/mesh-tools/commits/main
