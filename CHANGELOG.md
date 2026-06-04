@@ -6,6 +6,26 @@ All notable changes to this project are documented here. Format based on
 
 ## [Unreleased]
 
+## [0.4.0] — Semantic distillation
+
+### Added
+- `src/hooks/session-distiller.sh` — on `SessionEnd`, compresses the session's
+  black-box log (written by `session-logger.sh`) into 3-5 concrete operational
+  lessons via `claude --print` and appends them to a monthly
+  `auto-distilled-YYYYMM.md`. Never touches Claude Code's native memory or
+  `MEMORY.md`; always exits 0.
+- Distiller tests (`test/distiller.test.sh`, T1-T6 incl. timeout and append
+  race), wired into `npm test` with a fake `claude` on PATH — no tokens spent.
+- Distiller section in `src/hooks/README.md` (env vars, `SessionEnd` wiring,
+  recursion sentinel).
+
+### Notes
+- Portable: background-watchdog timeout (macOS has no coreutils `timeout`) and
+  atomic-`mkdir` locking (no `flock`).
+- Use `SessionEnd`, not `Stop` (`Stop` fires per turn and would duplicate), and
+  `claude --print` without `--bare` (`--bare` skips credential loading and
+  breaks auth).
+
 ## [0.3.0] — Methodology templates
 
 ### Added

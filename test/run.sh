@@ -51,3 +51,8 @@ fi
 echo
 echo "Running mesh smoke tests..."
 bash "$ROOT/test/mesh.test.sh" || exit 1
+
+# Distiller tests (use a fake `claude` on PATH; no tokens spent)
+echo
+echo "Running distiller tests..."
+bash "$ROOT/test/distiller.test.sh" || exit 1
