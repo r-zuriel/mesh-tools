@@ -78,7 +78,11 @@ fi
 LOGFILE=""
 newest=0
 for f in "${matches[@]}"; do
-  m=$(stat -f %m "$f" 2>/dev/null || stat -c %Y "$f" 2>/dev/null || echo 0)
+  # GNU stat first: BSD/macOS rejects -c (clean fallback), but GNU accepts
+  # -f %m as "filesystem mount point" — it SUCCEEDS with a non-numeric value,
+  # which would silently poison the comparison if tried first.
+  m=$(stat -c %Y "$f" 2>/dev/null || stat -f %m "$f" 2>/dev/null || echo 0)
+  case "$m" in (''|*[!0-9]*) m=0 ;; esac
   if [ "$m" -ge "$newest" ]; then newest="$m"; LOGFILE="$f"; fi
 done
 [ -f "$LOGFILE" ] || exit 0
