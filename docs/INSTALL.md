@@ -15,7 +15,7 @@ on macOS or Linux.
 ```bash
 git clone https://github.com/r-zuriel/mesh-tools.git
 cd mesh-tools
-npm test   # optional: 29 smoke/unit tests, no tokens spent
+npm test   # optional: smoke/unit tests, no tokens spent
 ```
 
 Components are independent — wire only what you want. Setup is manual today
