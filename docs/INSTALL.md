@@ -45,6 +45,10 @@ mesh-init.sh init
 mesh-init.sh register <your-first-identity>
 ```
 
+> Note: `~/.local/bin` is **not** on `PATH` by default on stock macOS — add
+> `export PATH="$HOME/.local/bin:$PATH"` to your shell profile, or copy the
+> scripts to a directory already on your `PATH`.
+
 Identity templates to adapt are in [src/mesh/identities/](../src/mesh/identities/).
 Trust model and `MESH_BUS_DIR` guidance: [SECURITY.md](../SECURITY.md).
 

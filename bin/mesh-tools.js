@@ -2,9 +2,9 @@
 /**
  * mesh-tools CLI
  *
- * Entrypoint for the mesh-tools toolkit. In this scaffold (F1) it exposes
- * --help / --version and an `init` stub. Component installers (hooks, mesh,
- * methods) are wired up in later versions.
+ * Entrypoint for the mesh-tools toolkit. It exposes --help / --version and an
+ * `init` command that points to the per-component wiring guides; an automated
+ * installer is planned but not promised.
  *
  * No runtime dependencies by design.
  */
@@ -24,7 +24,7 @@ Usage:
   mesh-tools <command> [options]
 
 Commands:
-  init        Scaffold hooks + mesh bus into ~/.claude (interactive, non-destructive)
+  init        Print the per-component wiring guides (automated setup is planned)
   help        Show this help
   version     Show version
 
@@ -32,7 +32,7 @@ Options:
   -h, --help     Show this help
   -v, --version  Show version
 
-Status: 0.x experimental. See https://github.com/r-zuriel/mesh-tools
+Docs & source: https://github.com/r-zuriel/mesh-tools
 `;
 
 function main(argv) {

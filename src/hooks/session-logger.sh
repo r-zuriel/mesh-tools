@@ -63,8 +63,9 @@ fi
 # shellcheck disable=SC2016
 printf -- '- `%s` **%s** %s\n' "$ts" "$tool" "$detail" >> "$logfile" 2>/dev/null
 
-# Per-session counter
-countfile="${TMPDIR:-/tmp}/mesh-checkpoint-${sid_short}"
+# Per-session counter — lives next to the logs (not in world-readable /tmp
+# under a predictable name)
+countfile="$LOGDIR/.checkpoint-${sid_short}"
 count=$(cat "$countfile" 2>/dev/null); [ -z "$count" ] && count=0
 count=$((count + 1))
 printf '%s' "$count" > "$countfile" 2>/dev/null

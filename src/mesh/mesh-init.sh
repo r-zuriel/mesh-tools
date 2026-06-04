@@ -3,7 +3,8 @@
 # mesh-init.sh — initialize / inspect the file-bus and manage identities.
 #
 # Usage:
-#   mesh-init.sh                          # show current state
+#   mesh-init.sh                          # initialize bus (if needed) + show state
+#   mesh-init.sh init                     # same as bare (explicit alias)
 #   mesh-init.sh register <id> [desc]     # register a new identity
 #   mesh-init.sh set-default <id>         # set the default local identity
 #   mesh-init.sh get-default              # print the resolved default identity
@@ -30,6 +31,11 @@ One line each: `- <id> · <description> · <last used>`
 
 EOF
 fi
+
+# `init` is an explicit alias of the bare invocation: the bus is created
+# above (mkdir + registry) and the state is shown below. Documented in the
+# README quickstart, so it must work.
+if [ "${1:-}" = "init" ]; then shift; fi
 
 if [ $# -eq 0 ]; then
   echo "=== Mesh state ==="
@@ -87,7 +93,7 @@ case "$CMD" in
     fi
     ;;
   *)
-    echo "Unknown command: $CMD (valid: register, set-default, get-default)" >&2
+    echo "Unknown command: $CMD (valid: init, register, set-default, get-default)" >&2
     exit 1
     ;;
 esac

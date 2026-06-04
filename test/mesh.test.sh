@@ -64,6 +64,14 @@ if bash "$INIT" | grep -q "carol"; then ok "register + state lists identity"; el
 bash "$INIT" set-default alice >/dev/null
 if bash "$INIT" get-default | grep -q "^alice "; then ok "set/get default identity"; else bad "set/get default"; fi
 
+# 13: `init` subcommand works as documented in the README quickstart
+#     (regression for the v1.0.0 gate finding: docs promised a subcommand
+#     the script didn't accept)
+if bash "$INIT" init | grep -q "Mesh state"; then ok "init subcommand shows state (README quickstart)"; else bad "init subcommand"; fi
+
+# 14: invalid msgid is rejected before touching the filesystem
+if bash "$CHECK" bob --show "../../etc/passwd" 2>&1 | grep -q "invalid msgid"; then ok "--show rejects invalid msgid"; else bad "msgid validation"; fi
+
 echo
 echo "Passed: $PASS  Failed: $FAIL"
 [ "$FAIL" -eq 0 ]

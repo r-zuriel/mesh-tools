@@ -1,8 +1,9 @@
 # Examples
 
-Anonymized, self-contained usage examples. Populated from **v0.1.0** onward as
-each component lands.
+Self-contained, copy-paste runnable examples. All content is synthetic —
+generic service names, example domains, no real infrastructure.
 
-Every example uses synthetic data only — generic hostnames (`prod-host-1`),
-example domains (`corp.example.com`), and placeholder IPs (`10.x.x.x`). No real
-infrastructure is referenced.
+| Example | Shows |
+|---|---|
+| [settings-full-wiring.jsonc](settings-full-wiring.jsonc) | Complete `.claude/settings.json` block wiring all three hooks (logger, monitor, distiller) |
+| [mesh-handoff-walkthrough.md](mesh-handoff-walkthrough.md) | Two identities end-to-end: proposal → adversarial verdict → threaded reply → close |

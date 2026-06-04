@@ -80,7 +80,7 @@ Design constraints (deliberate):
 | `MESH_DISTILLER_MODEL` | `haiku` | model passed to `claude --print` |
 | `MESH_DISTILLER_TIMEOUT_SEC` | `60` | claude call timeout |
 | `MESH_DISTILLER_OUTPUT_DIR` | `~/.claude/distilled` | where distillates are appended |
-| `MESH_DISTILLER_ERROR_LOG` | `/tmp/distiller-errors.log` | error log |
+| `MESH_DISTILLER_ERROR_LOG` | `~/.claude/distiller-errors.log` | error log |
 | `MESH_SESSION_LOG_DIR` | `~/.claude/session-logs` | where session logs live (shared with session-logger) |
 
 Requires the `claude` CLI authenticated on the machine (it reuses your existing

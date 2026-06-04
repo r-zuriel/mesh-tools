@@ -27,7 +27,7 @@
 #   MESH_DISTILLER_MODEL        (haiku)  cheap model is enough for distillation
 #   MESH_DISTILLER_TIMEOUT_SEC  (60)     claude call timeout
 #   MESH_DISTILLER_OUTPUT_DIR   (~/.claude/distilled)      where to append
-#   MESH_DISTILLER_ERROR_LOG    (/tmp/distiller-errors.log) error log
+#   MESH_DISTILLER_ERROR_LOG    (~/.claude/distiller-errors.log) error log
 #   MESH_SESSION_LOG_DIR        (~/.claude/session-logs)   where logs live
 #                               (same variable session-logger.sh writes to)
 #
@@ -44,7 +44,7 @@ MAX_INPUT_TOKENS="${MESH_DISTILLER_MAX_TOKENS:-30000}"
 MODEL="${MESH_DISTILLER_MODEL:-haiku}"
 TIMEOUT_SEC="${MESH_DISTILLER_TIMEOUT_SEC:-60}"
 OUTPUT_DIR="${MESH_DISTILLER_OUTPUT_DIR:-$HOME/.claude/distilled}"
-ERRLOG="${MESH_DISTILLER_ERROR_LOG:-/tmp/distiller-errors.log}"
+ERRLOG="${MESH_DISTILLER_ERROR_LOG:-$HOME/.claude/distiller-errors.log}"
 LOG_DIR="${MESH_SESSION_LOG_DIR:-$HOME/.claude/session-logs}"
 
 log_err() { printf '%s [distiller] %s\n' "$(date '+%Y-%m-%dT%H:%M:%S')" "$*" >>"$ERRLOG" 2>/dev/null || true; }
@@ -135,7 +135,7 @@ EOF
 # macOS has no coreutils `timeout`/`gtimeout`, so run claude in the background
 # with a watchdog. The whole block is wrapped to suppress job-control notices;
 # claude's real stderr still goes to $ERRLOG, and timeout is flagged via a file.
-OUTFILE="$(mktemp 2>/dev/null || echo /tmp/distiller-out.$$)"
+OUTFILE="$(mktemp 2>/dev/null || echo "$HOME/.claude/distiller-out.$$")"
 TIMED_OUT="${OUTFILE}.timeout"
 RESULT=""
 (

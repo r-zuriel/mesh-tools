@@ -44,8 +44,11 @@ inj2=$(logger_input "$SID3" "Bash" "only-one" | MESH_SESSION_LOG_DIR="$TMP/c2" M
 if [ -z "$inj2" ]; then ok "logger silent before Nth action"; else bad "logger premature checkpoint"; fi
 
 # 4: never fails even on garbage input
-echo 'not json' | MESH_SESSION_LOG_DIR="$TMP/g" bash "$LOGGER" >/dev/null 2>&1
-if [ $? -eq 0 ]; then ok "logger exits 0 on bad input"; else bad "logger nonzero on bad input"; fi
+if echo 'not json' | MESH_SESSION_LOG_DIR="$TMP/g" bash "$LOGGER" >/dev/null 2>&1; then
+  ok "logger exits 0 on bad input"
+else
+  bad "logger nonzero on bad input"
+fi
 
 # --- dw-monitor --------------------------------------------------------------
 SIDM="dddddddd-0000-0000-0000-000000000000"

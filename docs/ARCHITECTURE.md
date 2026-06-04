@@ -37,8 +37,9 @@ Each ships with explicit "when to use" and "when NOT to use" guidance.
 
 ## Design principles
 
-- **Non-destructive by default.** Installers back up before overwriting and
-  never disable native Claude Code behavior.
+- **Non-destructive by default.** Setup is manual and copy-paste: nothing is
+  overwritten unless you do it yourself, and nothing disables native Claude
+  Code behavior or removes hooks the toolkit didn't add.
 - **No private data.** The toolkit is generic; it ships no org-specific
   identities, hostnames, or operational records.
 - **No required network.** Visibility and mesh work entirely on the local

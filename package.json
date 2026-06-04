@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "test": "bash test/run.sh",
-    "lint": "shellcheck src/**/*.sh bin/*.sh 2>/dev/null || true"
+    "lint": "shellcheck src/hooks/*.sh src/mesh/*.sh test/*.sh"
   },
   "engines": {
     "node": ">=18"
