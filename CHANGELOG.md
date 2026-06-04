@@ -6,6 +6,26 @@ All notable changes to this project are documented here. Format based on
 
 ## [Unreleased]
 
+## [1.0.0] — Stable layout
+
+First stable release. No new components — this consolidates v0.1.0-v0.4.0
+into a coherent, documented whole.
+
+### Changed
+- README rewritten for visitors: component table with per-component docs,
+  honest install path (git clone + manual wiring; `npx` installer is planned,
+  not promised), real quickstarts for visibility and mesh.
+- `docs/INSTALL.md` rewritten around the actual manual setup, with full
+  uninstall steps.
+- `docs/ARCHITECTURE.md` now covers the distiller in the visibility layer.
+- `mesh-tools init` stub now points to the per-component wiring guides instead
+  of a stale roadmap note.
+
+### Stability
+- File layouts (`src/hooks`, `src/mesh`, `src/methods`), env var names
+  (`MESH_*`), and the bus message format are now considered stable; breaking
+  changes bump the major version.
+
 ## [0.4.0] — Semantic distillation
 
 ### Added

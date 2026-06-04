@@ -21,7 +21,9 @@ work. Each layer is only sustainable once the one below it is in place.
 Hooks that record what an agent does and surface it back. A session logger
 writes a black-box log of every Bash/Write/Edit and injects periodic
 checkpoints; a subagent monitor records Task/Agent invocations and aggregates
-failure rates.
+failure rates; on session close, a distiller compresses the black-box log into
+3-5 concrete operational lessons appended to a monthly file — raw logs are
+write-only memory, distillates are what you actually re-read.
 
 ### Mesh (`src/mesh`)
 A file-based message bus. Independent agent identities exchange async messages

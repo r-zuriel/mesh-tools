@@ -1,44 +1,67 @@
 # Installation
 
 `mesh-tools` targets [Claude Code](https://docs.claude.com/en/docs/claude-code)
-on macOS or Linux. It requires Node.js ≥ 18 and a POSIX `bash`.
+on macOS or Linux.
 
 ## Prerequisites
 
-- Node.js ≥ 18 (`node --version`)
 - Claude Code installed and configured
-- `bash`, `jq` (used by mesh and distiller components in later versions)
+- `bash` and [`jq`](https://jqlang.github.io/jq/)
+- Node.js ≥ 18 — only needed to run the test suite and the CLI stub
+- For the distiller: the `claude` CLI authenticated on the machine
 
-## Run without installing
-
-```bash
-npx @r-zuriel/mesh-tools init
-```
-
-## Install globally
+## Get the code
 
 ```bash
-npm install -g @r-zuriel/mesh-tools
-mesh-tools --help
+git clone https://github.com/r-zuriel/mesh-tools.git
+cd mesh-tools
+npm test   # optional: 29 smoke/unit tests, no tokens spent
 ```
 
-## What `init` does
+Components are independent — wire only what you want. Setup is manual today
+(an `npx` installer is planned); every step below is copy-paste.
 
-`init` is interactive and non-destructive: it scaffolds the visibility hooks
-and the mesh bus into your `~/.claude` directory, backing up any file it would
-otherwise overwrite. It never disables Claude Code's native memory or removes
-existing hooks.
+## 1. Visibility hooks
 
-> In the current scaffold (`0.0.0`) `init` is a stub. Component installers ship
-> starting in `v0.1.0`.
+```bash
+mkdir -p ~/.claude/scripts
+cp src/hooks/session-logger.sh src/hooks/dw-monitor.sh src/hooks/session-distiller.sh ~/.claude/scripts/
+chmod +x ~/.claude/scripts/{session-logger,dw-monitor,session-distiller}.sh
+```
+
+Then reference them from `~/.claude/settings.json` — exact JSON in
+[src/hooks/README.md § Install](../src/hooks/README.md#install). **Back up your
+`settings.json` before editing it.**
+
+- `session-logger.sh` + `dw-monitor.sh` → `PostToolUse`
+- `session-distiller.sh` → `SessionEnd` (NOT `Stop` — it fires per turn)
+
+## 2. Mesh bus
+
+```bash
+cp src/mesh/mesh-send.sh src/mesh/mesh-check.sh src/mesh/mesh-init.sh ~/.local/bin/   # or anywhere on PATH
+chmod +x ~/.local/bin/mesh-{send,check,init}.sh
+mesh-init.sh init
+mesh-init.sh register <your-first-identity>
+```
+
+Identity templates to adapt are in [src/mesh/identities/](../src/mesh/identities/).
+Trust model and `MESH_BUS_DIR` guidance: [SECURITY.md](../SECURITY.md).
+
+## 3. Methods & templates
+
+Nothing to install — read [src/methods/README.md](../src/methods/README.md) and
+copy the templates you use into your own workflow.
 
 ## Uninstall
 
-Global install:
+Everything lives in plain files you copied:
 
-```bash
-npm uninstall -g @r-zuriel/mesh-tools
-```
+- remove the scripts you placed in `~/.claude/scripts/` / your `PATH`
+- remove their entries from `~/.claude/settings.json`
+- the bus directory (default `~/.claude/bus/`) and logs
+  (`~/.claude/session-logs/`, `~/.claude/dw-logs/`, `~/.claude/distilled/`) are
+  yours to keep or delete
 
-Scaffolded hooks and bus files under `~/.claude` are listed by `init` and can be
-removed manually; a future `mesh-tools clean` will automate this.
+Nothing else is modified: the toolkit never disables Claude Code's native
+memory or removes hooks it didn't add.

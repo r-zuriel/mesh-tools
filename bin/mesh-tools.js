@@ -52,9 +52,13 @@ function main(argv) {
   switch (cmd) {
     case "init":
       process.stdout.write(
-        "init: not yet implemented in this version.\n" +
-          "Component installers ship starting in v0.1.0 (visibility hooks).\n" +
-          "Track progress: https://github.com/r-zuriel/mesh-tools\n"
+        "init: automated wiring is not implemented yet — setup is manual and documented.\n" +
+          "\n" +
+          "  1. Visibility hooks : src/hooks/README.md  (copy scripts + settings.json wiring)\n" +
+          "  2. Mesh bus         : src/mesh/README.md   (PATH + mesh-init.sh init)\n" +
+          "  3. Methods          : src/methods/README.md (read & copy templates)\n" +
+          "\n" +
+          "Full walkthrough: docs/INSTALL.md\n"
       );
       return 0;
     default:
