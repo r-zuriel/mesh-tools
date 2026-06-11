@@ -93,8 +93,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Issues and war stories from your own dep
 
 ## License
 
-[MIT](LICENSE) © 2026 Ricardo Zuriel Nuño Vazquez
+[MIT](LICENSE) © 2026 Ricardo Zuriel Nuno Vazquez
 
 ---
 
-Built by Ricardo Zuriel Nuño Vazquez — Infrastructure & Observability Engineer · Available for freelance.
+Built by Ricardo Zuriel Nuno Vazquez — Infrastructure & Observability Engineer · Available for freelance.

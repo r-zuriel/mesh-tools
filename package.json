@@ -29,7 +29,7 @@
     "mesh",
     "sre"
   ],
-  "author": "Ricardo Zuriel Nuño Vazquez <r.zuriel.nuno@protonmail.com>",
+  "author": "Ricardo Zuriel Nuno Vazquez <r.zuriel.nuno@proton.me>",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
