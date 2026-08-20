@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/r-zuriel/mesh-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/r-zuriel/mesh-tools/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/r-zuriel/mesh-tools)](https://github.com/r-zuriel/mesh-tools/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+**License:** source-available, all rights reserved — see [LICENSE](LICENSE)
 
 **Visibility & methodology tools for AI-augmented infrastructure work.**
 
@@ -144,7 +144,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Issues and war stories from your own dep
 
 ## License
 
-[MIT](LICENSE) © 2026 Ricardo Zuriel Nuno Vazquez
+All rights reserved © 2026 Ricardo Zuriel Nuño Vázquez — see [LICENSE](LICENSE)
 
 ---
 

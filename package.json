@@ -30,7 +30,7 @@
     "sre"
   ],
   "author": "Ricardo Zuriel Nuno Vazquez <r.zuriel.nuno@proton.me>",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "publishConfig": {
     "access": "public"
   }
