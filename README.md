@@ -83,6 +83,57 @@ Identity templates (dev, reviewer, documenter, methodologist) live in [src/mesh/
 
 The tools assume a layered model: a base CLI/agent, visibility on top, then a mesh of specialized identities, then methodology applied across them. Each layer is useful alone; they compound when combined. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
+### The file-bus mesh
+
+The mesh is deliberately boring: no daemon, no broker, no network. A message is a
+Markdown file with a YAML frontmatter header, written into the recipient's inbox
+directory. `mesh-send` writes it atomically (an intra-directory temp file renamed
+into place) so an external file watcher — FSEvents on macOS, inotify on Linux —
+sees a single, clean create event and can wake the recipient. Nothing here polls;
+the filesystem is the queue.
+
+```mermaid
+flowchart LR
+    dev["dev<br/>(sender identity)"]
+    rev["reviewer<br/>(recipient identity)"]
+
+    subgraph BUS["MESH_BUS_DIR  (~/.claude/bus)"]
+        inbox["reviewer/&lt;msgid&gt;.md<br/>new"]
+        read["reviewer/_read/&lt;msgid&gt;.md<br/>after --read"]
+        reg["_identities.md<br/>registry"]
+    end
+
+    dev -- "mesh-send.sh<br/>atomic temp + mv" --> inbox
+    inbox -. "create event<br/>(FSEvents / inotify)" .-> rev
+    rev -- "mesh-check.sh --show" --> inbox
+    rev -- "mesh-check.sh --read" --> read
+    dev -. "auto-register" .-> reg
+    rev -. "auto-register" .-> reg
+```
+
+Every message file carries `from`, `to`, `sent`, `priority`, `msg-id`, and an
+optional `in-reply-to` in its frontmatter — so a thread is reconstructable from
+the files alone, and the whole bus is trivial to inspect, `grep`, version, or back
+up. The trust boundary is the local user (see [SECURITY.md](SECURITY.md)); keep
+`MESH_BUS_DIR` under `$HOME`.
+
+## What's in the box
+
+```
+mesh-tools/
+├── bin/        mesh-tools CLI — --help/--version + init (points at the wiring guides)
+├── src/
+│   ├── hooks/  session-logger · dw-monitor · session-distiller (visibility)
+│   ├── mesh/   mesh-send · mesh-check · mesh-init + 4 identity templates
+│   └── methods/ 7 methods + 4 copy-paste templates (methodology)
+├── examples/   settings.json wiring + an end-to-end mesh handoff walkthrough
+├── docs/       ARCHITECTURE.md · INSTALL.md
+└── test/       bash test suite (npm test)
+```
+
+No runtime dependencies: everything is `bash` + `jq` + standard POSIX tools, with a
+thin Node entrypoint for the CLI.
+
 ## Security
 
 See [SECURITY.md](SECURITY.md) for the trust model — in short: local filesystem, same-user trust boundary, keep `MESH_BUS_DIR` under `$HOME`.

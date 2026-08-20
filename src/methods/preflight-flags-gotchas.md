@@ -184,7 +184,7 @@ and what emerged.
    reviewer.
 2. New gotchas that emerged are direct input for whoever curates the team's
    knowledge base (to harvest into the lessons store) and for the reviewer (to
-   judge whether it is a harvestable pattern or an edge case).
+   judge whether it is a reusable pattern worth harvesting or an edge case).
 3. If coverage is below ~80%, investigate why. Poorly predicted gotchas signal
    that the subsystem's documentation is incomplete or that the applicability
    classifier is failing.
