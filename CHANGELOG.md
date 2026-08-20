@@ -6,6 +6,11 @@ All notable changes to this project are documented here. Format based on
 
 ## [Unreleased]
 
+### Changed
+- **License changed from MIT to source-available / All Rights Reserved** (portfolio policy).
+  Note: the MIT grant on previously released versions (v1.0.0 and earlier) remains in effect
+  for those versions and is not retroactively revocable; the new terms apply going forward.
+
 ## [1.0.0] — Stable layout
 
 First stable release. No new components — this consolidates v0.1.0-v0.4.0
