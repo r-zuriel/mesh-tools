@@ -144,8 +144,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Issues and war stories from your own dep
 
 ## License
 
-All rights reserved © 2026 Ricardo Zuriel Nuño Vázquez — see [LICENSE](LICENSE)
+All rights reserved © 2026 Zuriel Vázquez — see [LICENSE](LICENSE)
 
 ---
 
-Built by Ricardo Zuriel Nuno Vazquez — Infrastructure & Observability Engineer · Available for freelance.
+Built by Zuriel Vázquez — AI Builder / AI-augmented Infrastructure Engineer · Available for freelance.
